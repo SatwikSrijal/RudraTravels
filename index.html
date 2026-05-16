@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust Travels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00a8ff;
+            --secondary: #192a56;
+            --dark: #2f3640;
+            --light: #f5f6fa;
+            --success: #4cd137;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        .logo span { color: var(--primary); }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        .page.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slider-container {
+            position: relative;
+            height: 70vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active-slide {
+            opacity: 1;
+        }
+
+        .slide-overlay {
+            text-align: center;
+            color: white;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 800px;
+        }
+
+        .slide-overlay h1 { font-size: 48px; margin-bottom: 15px; }
+        .slide-overlay p { font-size: 20px; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 32px;
+            color: var(--secondary);
+            margin-bottom: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .client-logo-grid {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .client-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #b2bec3;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h3 { margin-bottom: 15px; color: var(--secondary); }
+        .about-text p { line-height: 1.6; margin-bottom: 20px; color: #636e72; }
+
+        .timeline {
+            border-left: 3px solid var(--primary);
+            padding-left: 20px;
+            margin-top: 20px;
+        }
+
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--secondary);
+            border-radius: 50%;
+            left: -28px;
+            top: 5px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .info-box i { font-size: 24px; color: var(--primary); }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover { background: #0097e6; }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--success);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        footer {
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">Wanderlust<span>Travels</span></div>
+            <nav>
+                <ul>
+                    <li><a onclick="switchPage('home')" id="nav-home" class="active">Home</a></li>
+                    <li><a onclick="switchPage('about')" id="nav-about">About Us</a></li>
+                    <li><a onclick="switchPage('contact')" id="nav-contact">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <a href="https://wa.me/8877170000?text=Hello!%20I'm%20interested%20in%20booking%20a%20trip." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div id="page-home" class="page active-page">
+        <div class="slider-container">
+            <div class="slide active-slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1353&q=80');">
+                <div class="slide-overlay">
+                    <h1>Explore Pristine Beaches</h1>
+                    <p>Escape to paradise with our custom-tailored tropical getaways.</p>
+                </div>
+            </div>
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1350&q=80');">
+                <div class="slide-overlay">
+                    <h1>Conquer Majestic Peaks</h1>
+                    <p>For the thrill-seekers and mountain lovers around the globe.</p>
+                </div>
+            </div>
+            <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1350&q=80');">
+                <div class="slide-overlay">
+                    <h1>Discover Vibrant Cities</h1>
+                    <p>Immerse yourself in rich cultures, historic landmarks, and modern architecture.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Why Travel With Us?</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <i class="fas fa-route"></i>
+                    <h3>Custom Itineraries</h3>
+                    <p>We build travel schedules tailored strictly to your personal pacing and destination choices.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Safe & Trusted</h3>
+                    <p>Verified premium accommodations and fully certified local guides ensuring absolute safety.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Live Support</h3>
+                    <p>Our travel desk is always alert to manage shifts, delays, or emergency booking adjustments.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="background: #f0f2f5; max-width: 100%;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <h2>Our Prominent Corporate Clients</h2>
+                <div class="client-logo-grid">
+                    <div class="client-logo"><i class="fas fa-building"></i> Apex Corp</div>
+                    <div class="client-logo"><i class="fas fa-globe"></i> Global Tech</div>
+                    <div class="client-logo"><i class="fas fa-chart-line"></i> Nexus Finance</div>
+                    <div class="client-logo"><i class="fas fa-hotel"></i> Horizon Group</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-about" class="page">
+        <div class="container">
+            <h2>About Our Agency</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h3>The Visionary Behind the Journeys</h3>
+                    <p>Founded by an avid traveler, our agency was built on the core principle that travel should build connections, not complications. We map routes to make the world cleanly accessible to families and corporate entities alike.</p>
+                    
+                    <h3>Our Corporate Journey</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <strong>2018 - The Spark</strong>
+                            <p>Started operations with local, specialized weekend retreat offerings.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <strong>2021 - Going Global</strong>
+                            <p>Expanded networks internationally across 12 distinct destination corridors.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <strong>2026 - Present Day Excellence</strong>
+                            <p>Proudly recognized as a primary trusted vendor for premium corporate custom tours.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Our Office" style="width:100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-contact" class="page">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Reach Us Directly</h3>
+                    <p>Have an explicit destination query? Connect through our hotlines instantly.</p>
+                    
+                    <div class="info-box">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <strong>Call Us</strong>
+                            <p><a href="tel:+918877170000" style="text-decoration:none; color:inherit;">+918877170000</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fab fa-whatsapp" style="color: var(--success);"></i>
+                        <div>
+                            <strong>WhatsApp Chat</strong>
+                            <p><a href="https://wa.me/8877170000" target="_blank" style="text-decoration:none; color:inherit;">Message Live Agent</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email Inquiries</strong>
+                            <p><a href="mailto:sahityasrijal@gmail.com" style="text-decoration:none; color:inherit;">sahityasrijal@gmail.com</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Plan Custom Itinerary</h3>
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="18152d15-e1a7-44cb-91fe-2bc710baf418">
+
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" name="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Target Destination</label>
+                            <input type="text" name="destination" placeholder="e.g., Switzerland, Bali" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Message</label>
+                            <textarea name="message" rows="4" placeholder="Mention group numbers or specific dates..." required></textarea>
+                        </div>
+
+                        <input type="hidden" name="redirect" value="https://web3forms.com/success">
+
+                        <button type="submit" class="btn">Send Inquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Wanderlust Travels. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function switchPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active-page'));
+
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            document.getElementById(`page-${pageId}`).classList.add('active-page');
+            document.getElementById(`nav-${pageId}`).classList.add('active');
+
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active-slide');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active-slide');
+        }
+
+        setInterval(nextSlide, 4000);
+    </script>
+</body>
+</html>
