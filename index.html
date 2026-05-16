@@ -8,7 +8,7 @@
     <style>
         /* --- CSS STYLING --- */
         :root {
-            --primary: #4cd137; /* Updated to match the logo accents */
+            --primary: #4cd137; /* Matches the logo accents */
             --secondary: #0b1320; /* Matches the exact dark background of your logo */
             --dark: #2f3640;
             --light: #f5f6fa;
@@ -279,7 +279,6 @@
         }
         .whatsapp-float:hover { transform: scale(1.1); }
 
-        /* Footer Customization */
         footer {
             background: var(--secondary);
             color: white;
@@ -289,9 +288,62 @@
         }
 
         .footer-logo img {
-            height: 100px; /* Slightly larger logo footprint for footer presentation */
+            height: 100px;
             width: auto;
             margin-bottom: 15px;
+        }
+
+        /* ===================================================
+           NEW MOBILE RESPONSIVENESS (MEDIA QUERY LAYER)
+        ====================================================== */
+        @media (max-width: 768px) {
+            /* Navbar adjustments */
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 10px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+
+            /* Slideshow font scaling */
+            .slide-overlay h1 {
+                font-size: 28px;
+            }
+            .slide-overlay p {
+                font-size: 16px;
+            }
+            .slide-overlay {
+                padding: 20px;
+                margin: 0 15px;
+            }
+
+            /* Main section adjustments */
+            .container {
+                padding: 40px 15px;
+            }
+            h2 {
+                font-size: 26px;
+                margin-bottom: 25px;
+            }
+
+            /* About page layout breakdown */
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            /* FIXED: Contact sections stack vertically on mobile */
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .contact-form {
+                padding: 25px 20px;
+            }
         }
     </style>
 </head>
