@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wanderlust Travels</title>
+    <title>Rudra Travels</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* --- CSS STYLING --- */
         :root {
-            --primary: #00a8ff;
-            --secondary: #192a56;
+            --primary: #4cd137; /* Updated to match the logo accents */
+            --secondary: #0b1320; /* Matches the exact dark background of your logo */
             --dark: #2f3640;
             --light: #f5f6fa;
             --success: #4cd137;
@@ -26,9 +27,10 @@
             color: var(--dark);
         }
 
+        /* Navigation Bar */
         header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background-color: var(--secondary); /* Dark background to seamlessly fit the logo */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -40,25 +42,24 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px 20px;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--secondary);
+        .logo-container img {
+            height: 60px; /* Constrains logo size in the header nicely */
+            width: auto;
+            display: block;
         }
-        .logo span { color: var(--primary); }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 25px;
         }
 
         nav a {
             text-decoration: none;
-            color: var(--dark);
+            color: #ffffff;
             font-weight: 600;
             cursor: pointer;
             transition: color 0.3s;
@@ -68,6 +69,7 @@
             color: var(--primary);
         }
 
+        /* Page Container Management */
         .page {
             display: none;
             animation: fadeIn 0.5s ease-in-out forwards;
@@ -82,6 +84,8 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- HOME PAGE STYLES --- */
+        /* Slideshow / Hero */
         .slider-container {
             position: relative;
             height: 70vh;
@@ -147,7 +151,7 @@
 
         .card i {
             font-size: 40px;
-            color: var(--primary);
+            color: var(--secondary);
             margin-bottom: 20px;
         }
 
@@ -170,6 +174,7 @@
             letter-spacing: 2px;
         }
 
+        /* --- ABOUT PAGE STYLES --- */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -181,7 +186,7 @@
         .about-text p { line-height: 1.6; margin-bottom: 20px; color: #636e72; }
 
         .timeline {
-            border-left: 3px solid var(--primary);
+            border-left: 3px solid var(--secondary);
             padding-left: 20px;
             margin-top: 20px;
         }
@@ -196,12 +201,13 @@
             position: absolute;
             width: 12px;
             height: 12px;
-            background: var(--secondary);
+            background: var(--primary);
             border-radius: 50%;
             left: -28px;
             top: 5px;
         }
 
+        /* --- CONTACT PAGE STYLES --- */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -223,7 +229,7 @@
             border-radius: 8px;
         }
 
-        .info-box i { font-size: 24px; color: var(--primary); }
+        .info-box i { font-size: 24px; color: var(--secondary); }
 
         .contact-form {
             background: white;
@@ -242,7 +248,7 @@
         }
 
         .btn {
-            background: var(--primary);
+            background: var(--secondary);
             color: white;
             padding: 12px 24px;
             border: none;
@@ -251,7 +257,7 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-        .btn:hover { background: #0097e6; }
+        .btn:hover { background: #1e272e; }
 
         .whatsapp-float {
             position: fixed;
@@ -273,12 +279,19 @@
         }
         .whatsapp-float:hover { transform: scale(1.1); }
 
+        /* Footer Customization */
         footer {
             background: var(--secondary);
             color: white;
             text-align: center;
-            padding: 30px;
+            padding: 40px 20px;
             margin-top: 40px;
+        }
+
+        .footer-logo img {
+            height: 100px; /* Slightly larger logo footprint for footer presentation */
+            width: auto;
+            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -286,7 +299,9 @@
 
     <header>
         <div class="navbar">
-            <div class="logo">Wanderlust<span>Travels</span></div>
+            <div class="logo-container">
+                <img src="logo.jpeg" alt="Rudra Travels Logo">
+            </div>
             <nav>
                 <ul>
                     <li><a onclick="switchPage('home')" id="nav-home" class="active">Home</a></li>
@@ -416,7 +431,7 @@
                         <i class="fas fa-envelope"></i>
                         <div>
                             <strong>Email Inquiries</strong>
-                            <p><a href="mailto:support@rudratravels.in" style="text-decoration:none; color:inherit;">support@rudratravels.in</a></p>
+                            <p><a href="mailto:sahityasrijal@gmail.com" style="text-decoration:none; color:inherit;">sahityasrijal@gmail.com</a></p>
                         </div>
                     </div>
                 </div>
@@ -449,7 +464,10 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Wanderlust Travels. All Rights Reserved.</p>
+        <div class="footer-logo">
+            <img src="logo.jpeg" alt="Rudra Travels Footer Logo">
+        </div>
+        <p>&copy; 2026 Rudra Travels. All Rights Reserved.</p>
     </footer>
 
     <script>
