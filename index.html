@@ -374,22 +374,142 @@
         .financial-table tr:last-child td { border: none; }
         .financial-table tr:nth-child(even) { background-color: #f8f9fa; }
 
-        .info-box {
-            display: flex; align-items: center; gap: 20px; background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;
+        /* ===================================================
+           ATTRACTIVE DESIGN FOR CALLING & CONTACT INFRASTRUCTURE
+        ====================================================== */
+        .contact-left-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
         }
 
-        /* Contact Page Hyperlink Rules */
-        .contact-link {
-            text-decoration: none;
-            color: #57606f;
-            display: block;
-            transition: color 0.2s ease-in-out;
+        .contact-section-heading {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .contact-link:hover {
+
+        .contact-section-heading i {
             color: var(--primary);
         }
 
-        .contact-form { background: white; padding: 40px; border-radius: 8px; }
+        .phone-cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .phone-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            border-left: 4px solid var(--secondary);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-left-color 0.2s ease;
+            text-decoration: none;
+        }
+
+        .phone-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border-left-color: var(--primary);
+        }
+
+        .phone-info-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .phone-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #718093;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .phone-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .call-action-icon {
+            width: 40px;
+            height: 40px;
+            background: #f1f2f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 16px;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .phone-card:hover .call-action-icon {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        /* Email Card Layout */
+        .email-box-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .email-box-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border-color: rgba(76, 209, 55, 0.3);
+        }
+
+        .email-icon-circle {
+            width: 50px;
+            height: 50px;
+            background: rgba(11, 19, 32, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--secondary);
+        }
+
+        .email-details h4 {
+            font-size: 14px;
+            color: #718093;
+            margin-bottom: 2px;
+        }
+
+        .email-address-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .email-box-card:hover .email-address-text {
+            color: var(--primary);
+        }
+
+        .contact-form { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .form-group { margin-bottom: 20px; }
         .form-group input, .form-group textarea {
             width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;
@@ -659,30 +779,55 @@
         <div class="container">
             <h2>Get In Touch</h2>
             <div class="contact-grid">
-                <div>
-                    <div class="info-box">
-                        <i class="fas fa-phone-alt"></i>
-                        <div>
-                            <strong>Call Infrastructure Hotlines</strong>
-                            <p style="margin-top:4px; font-size:15px;">
-                                Landline Desk: <a href="tel:03262207000" class="contact-link">0326-2207000</a>
-                            </p>
-                            <p style="font-size:15px;">
-                                Mobile Agent 1: <a href="tel:+919430176277" class="contact-link">+91 9430176277</a>
-                            </p>
-                            <p style="font-size:15px;">
-                                Mobile Agent 2: <a href="tel:+919334954000" class="contact-link">+91 9334954000</a>
-                            </p>
+                
+                <div class="contact-left-wrapper">
+                    
+                    <div>
+                        <h3 class="contact-section-heading"><i class="fas fa-headset"></i> Call Infrastructure</h3>
+                        <p style="color:#718093; margin-bottom:15px; font-size:14px;">Click any card below to launch an instant call routing setup to our desk agents.</p>
+                        
+                        <div class="phone-cards-container">
+                            <a href="tel:03262207000" class="phone-card">
+                                <div class="phone-info-left">
+                                    <span class="phone-label">Landline Support Desk</span>
+                                    <span class="phone-number">0326-2207000</span>
+                                </div>
+                                <div class="call-action-icon"><i class="fas fa-phone"></i></div>
+                            </a>
+
+                            <a href="tel:+919430176277" class="phone-card">
+                                <div class="phone-info-left">
+                                    <span class="phone-label">Primary Desk Agent</span>
+                                    <span class="phone-number">+91 9430176277</span>
+                                </div>
+                                <div class="call-action-icon"><i class="fas fa-mobile-alt"></i></div>
+                            </a>
+
+                            <a href="tel:+919334954000" class="phone-card">
+                                <div class="phone-info-left">
+                                    <span class="phone-label">Secondary Operations</span>
+                                    <span class="phone-number">+91 9334954000</span>
+                                </div>
+                                <div class="call-action-icon"><i class="fas fa-mobile-alt"></i></div>
+                            </a>
                         </div>
                     </div>
-                    <div class="info-box">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <strong>Email Inquiries</strong>
-                            <p><a href="mailto:support@rudratravels.in" class="contact-link">support@rudratravels.in</a></p>
+
+                    <div>
+                        <h3 class="contact-section-heading"><i class="fas fa-envelope-open-text"></i> Digital Mailing</h3>
+                        <div style="margin-top:10px;">
+                            <a href="mailto:support@rudratravels.in" class="email-box-card">
+                                <div class="email-icon-circle"><i class="fas fa-envelope"></i></div>
+                                <div class="email-details">
+                                    <h4>Email Desk Inquiries</h4>
+                                    <span class="email-address-text">support@rudratravels.in</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
+
                 </div>
+
                 <div class="contact-form">
                     <h3>Plan Your Trip</h3>
                     <form action="https://api.web3forms.com/submit" method="POST">
@@ -693,6 +838,7 @@
                         <button type="submit" class="btn">Send Inquiry</button>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
