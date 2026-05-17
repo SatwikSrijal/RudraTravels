@@ -271,7 +271,7 @@
             display: block;
         }
 
-        /* Image Sourced Visual Timeline Elements */
+        /* Visual Timeline Elements */
         .img-timeline {
             position: relative;
             border-left: 3px solid #dcdde1;
@@ -376,6 +376,17 @@
 
         .info-box {
             display: flex; align-items: center; gap: 20px; background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;
+        }
+
+        /* Contact Page Hyperlink Rules */
+        .contact-link {
+            text-decoration: none;
+            color: #57606f;
+            display: block;
+            transition: color 0.2s ease-in-out;
+        }
+        .contact-link:hover {
+            color: var(--primary);
         }
 
         .contact-form { background: white; padding: 40px; border-radius: 8px; }
@@ -653,16 +664,22 @@
                         <i class="fas fa-phone-alt"></i>
                         <div>
                             <strong>Call Infrastructure Hotlines</strong>
-                            <p style="margin-top:4px; font-size:15px; color:#57606f;">Landline Desk: 0326-2207000</p>
-                            <p style="font-size:15px; color:#57606f;">Mobile Agent 1: +91 9430176277</p>
-                            <p style="font-size:15px; color:#57606f;">Mobile Agent 2: +91 9334954000</p>
+                            <p style="margin-top:4px; font-size:15px;">
+                                Landline Desk: <a href="tel:03262207000" class="contact-link">0326-2207000</a>
+                            </p>
+                            <p style="font-size:15px;">
+                                Mobile Agent 1: <a href="tel:+919430176277" class="contact-link">+91 9430176277</a>
+                            </p>
+                            <p style="font-size:15px;">
+                                Mobile Agent 2: <a href="tel:+919334954000" class="contact-link">+91 9334954000</a>
+                            </p>
                         </div>
                     </div>
                     <div class="info-box">
                         <i class="fas fa-envelope"></i>
                         <div>
                             <strong>Email Inquiries</strong>
-                            <p>sahityasrijal@gmail.com</p>
+                            <p><a href="mailto:sahityasrijal@gmail.com" class="contact-link">sahityasrijal@gmail.com</a></p>
                         </div>
                     </div>
                 </div>
@@ -694,7 +711,6 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // Sub-navigation script for inside the About tab
         function switchTab(contentId, buttonElement) {
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active-content'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active-tab'));
