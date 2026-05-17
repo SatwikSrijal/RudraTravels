@@ -246,6 +246,7 @@
             cursor: pointer;
             position: relative;
             transition: color 0.3s;
+            white-space: nowrap;
         }
 
         .tab-btn.active-tab {
@@ -282,6 +283,10 @@
         .timeline-block {
             position: relative;
             margin-bottom: 25px;
+            background: #ffffff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
         }
 
         .timeline-block::before {
@@ -289,16 +294,17 @@
             font-family: 'Font Awesome 5 Free';
             font-weight: 900;
             position: absolute;
-            left: -34px;
-            top: 0;
+            left: -35px;
+            top: 15px;
             background: var(--secondary);
             color: #ffffff;
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             text-align: center;
             font-size: 10px;
-            line-height: 16px;
+            line-height: 18px;
+            z-index: 2;
         }
 
         .timeline-year {
@@ -306,6 +312,9 @@
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 8px;
+            display: inline-block;
+            border-bottom: 2px solid rgba(76, 209, 55, 0.2);
+            padding-bottom: 2px;
         }
 
         .timeline-clients {
@@ -313,18 +322,20 @@
         }
 
         .timeline-clients li {
-            padding: 4px 0;
+            padding: 5px 0;
             font-size: 15px;
             color: #57606f;
             position: relative;
             padding-left: 15px;
+            line-height: 1.4;
         }
 
         .timeline-clients li::before {
             content: '•';
             position: absolute;
             left: 0;
-            color: var(--secondary);
+            color: var(--primary);
+            font-weight: bold;
         }
 
         /* Sector Grid Layout */
@@ -344,17 +355,28 @@
             font-weight: 700;
             color: var(--secondary);
             border-bottom: 3px solid var(--secondary);
+            transition: transform 0.2s;
         }
 
-        /* Financials Structured Table Styling */
+        .sector-box:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Financials Table Styling */
+        .table-responsive-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-top: 15px;
+        }
+
         .financial-table {
             width: 100%;
             border-collapse: collapse;
             background: #ffffff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            margin-top: 15px;
+            min-width: 500px; /* Ensures formatting stays crisp even when scrolled */
         }
 
         .financial-table th {
@@ -374,9 +396,7 @@
         .financial-table tr:last-child td { border: none; }
         .financial-table tr:nth-child(even) { background-color: #f8f9fa; }
 
-        /* ===================================================
-           ATTRACTIVE DESIGN FOR CALLING & CONTACT INFRASTRUCTURE
-        ====================================================== */
+        /* Contact Left Layout */
         .contact-left-wrapper {
             display: flex;
             flex-direction: column;
@@ -394,9 +414,7 @@
             gap: 10px;
         }
 
-        .contact-section-heading i {
-            color: var(--primary);
-        }
+        .contact-section-heading i { color: var(--primary); }
 
         .phone-cards-container {
             display: flex;
@@ -505,9 +523,7 @@
             color: var(--secondary);
         }
 
-        .email-box-card:hover .email-address-text {
-            color: var(--primary);
-        }
+        .email-box-card:hover .email-address-text { color: var(--primary); }
 
         .contact-form { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .form-group { margin-bottom: 20px; }
@@ -528,14 +544,47 @@
         }
         .footer-logo img { height: 80px; margin-bottom: 10px; }
 
-        /* Media Queries */
+        /* ===================================================
+           ADVANCED RESPONSIVE MEDIA QUERIES (MOBILE FIXES)
+        ====================================================== */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; }
             .about-grid, .contact-grid, .gallery-grid, .sector-grid { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: repeat(2, 1fr); }
             .slide-overlay h1 { font-size: 28px; }
-            .tabs-header { flex-direction: column; gap: 0; }
+
+            /* FIX 1: Horizontal scrolling app-like navigation bar for sub-tabs */
+            .tabs-header {
+                overflow-x: auto;
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+                border-bottom: 2px solid #ddd;
+                padding-bottom: 2px;
+                scrollbar-width: none; /* Firefox hiding rule */
+            }
+            .tabs-header::-webkit-scrollbar {
+                display: none; /* Chrome/Safari hiding rule */
+            }
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+                flex: 0 0 auto;
+            }
+
+            /* FIX 2: Better timeline structure padding adjustments on mobile viewports */
+            .img-timeline {
+                margin-left: 5px;
+                padding-left: 18px;
+            }
+            .timeline-block {
+                padding: 12px 15px;
+            }
+            .timeline-block::before {
+                left: -28px;
+            }
         }
+        
         @media (max-width: 480px) {
             .gallery-grid { grid-template-columns: 1fr; }
         }
@@ -753,23 +802,25 @@
 
             <div id="financial-content" class="tab-content">
                 <h3 style="color: var(--secondary); margin-bottom: 10px;">Audited Turnover History</h3>
-                <p style="color: #57606f; line-height: 1.6;">Our robust financial growth trends reflect institutional quality stability over consecutive strategic fiscal terms:</p>
-                <table class="financial-table">
-                    <thead>
-                        <tr>
-                            <th>Fiscal Timeline Year</th>
-                            <th>Annual Audited Turnover Footprint</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>2010 - 2011</strong></td><td>₹ 5,57,000 Approx.</td></tr>
-                        <tr><td><strong>2011 - 2012</strong></td><td>₹ 8,30,000 Approx.</td></tr>
-                        <tr><td><strong>2012 - 2013</strong></td><td>₹ 48,96,000 Approx.</td></tr>
-                        <tr><td><strong>2013 - 2014</strong></td><td>₹ 48,35,000 Approx.</td></tr>
-                        <tr><td><strong>2014 - 2015</strong></td><td>₹ 55,99,000 Approx.</td></tr>
-                        <tr><td><strong>2015 - 2016</strong></td><td>₹ 94,91,000 Approx.</td></tr>
-                    </tbody>
-                </table>
+                <p style="color: #57606f; line-height: 1.6; margin-bottom: 15px;">Our robust financial growth trends reflect institutional quality stability over consecutive strategic fiscal terms (Swipe left/right to browse table on mobile devices):</p>
+                <div class="table-responsive-wrapper">
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                <th>Fiscal Timeline Year</th>
+                                <th>Annual Audited Turnover Footprint</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>2010 - 2011</strong></td><td>₹ 5,57,000 Approx.</td></tr>
+                            <tr><td><strong>2011 - 2012</strong></td><td>₹ 8,30,000 Approx.</td></tr>
+                            <tr><td><strong>2012 - 2013</strong></td><td>₹ 48,96,000 Approx.</td></tr>
+                            <tr><td><strong>2013 - 2014</strong></td><td>₹ 48,35,000 Approx.</td></tr>
+                            <tr><td><strong>2014 - 2015</strong></td><td>₹ 55,99,000 Approx.</td></tr>
+                            <tr><td><strong>2015 - 2016</strong></td><td>₹ 94,91,000 Approx.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
@@ -781,7 +832,6 @@
             <div class="contact-grid">
                 
                 <div class="contact-left-wrapper">
-                    
                     <div>
                         <h3 class="contact-section-heading"><i class="fas fa-headset"></i> Call Infrastructure</h3>
                         <p style="color:#718093; margin-bottom:15px; font-size:14px;">Click any card below to launch an instant call routing setup to our desk agents.</p>
@@ -825,7 +875,6 @@
                             </a>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="contact-form">
